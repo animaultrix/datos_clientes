@@ -1,0 +1,93 @@
+<div class="modal" tabindex="-1" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{(client.id > 0)?'Actualizar':'Crear'}} cliente</h5>
+          <button 
+            type="button" 
+            class="btn-close" 
+            data-bs-dismiss="modal" 
+            aria-label="Close"
+            (click)="onOpenClose(clientForm)">
+
+          </button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="onSubmit(clientForm)" #clientForm="ngForm">
+                <div>
+                    <input 
+                    placeholder="Nombre"
+                    name="name"
+                    [(ngModel)]="client.name"
+                    class="form-control"
+                    required
+                    minlength="1"
+                    #name="ngModel"
+                    >
+                    @if (name.invalid && (name.dirty || name.touched)) {
+                        @if (name.errors!['required']) {
+                            <div class="text-danger">
+                                Nombre es requerido
+                            </div>
+                        }
+                        @if (name.errors!['minlength']) {
+                            <div class="text-danger">
+                                Nombre debe ser mayor a 1
+                            </div>
+                        }
+                        
+                    }
+                </div>
+                <div>
+                    <input 
+                    placeholder="Primer apellido"
+                    name="lastname1"
+                    [(ngModel)]="client.lastname1"
+                    class="form-control"
+                    required
+                    #lastname1="ngModel"
+                    >
+                    @if (lastname1.invalid && (lastname1.dirty || lastname1.touched)) {
+                        @if (lastname1.errors!['required']) {
+                            <div class="text-danger">
+                                Apellido es requerido
+                            </div>
+                        }
+                        
+                    }
+                </div>
+                <div>
+                    <input 
+                    placeholder="Segundo apellido"
+                    name="lastname2"
+                    [(ngModel)]="client.lastname2"
+                    class="form-control"
+                    #lastname2="ngModel"
+                    >
+                </div>
+                <div>
+                    <button 
+                    type="submit" 
+                    class="btn btn-primary my-2"
+                    [disabled]="clientForm.invalid">
+                        {{(client.id > 0)?'actualizar':'crear'}}
+                    </button>
+                    <button 
+                    type="button" 
+                    class="btn btn-secondary m-2"
+                    (click)="onClear(clientForm)">
+                        limpiar
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button 
+            type="button" 
+            class="btn btn-secondary" 
+            data-bs-dismiss="modal" 
+            (click)="onOpenClose(clientForm)">Cerrar</button>          
+        </div>
+      </div>
+    </div>
+  </div>
