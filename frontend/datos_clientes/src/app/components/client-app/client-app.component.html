@@ -1,22 +1,5 @@
 <div class="container my-4">
-    <button class="btn btn-primary"
-        (click)="setOpen()">
-        {{open?'Cerrar':'Crear Cliente'}}
-    </button>
-    <div class="row">        
-        <div class="col">            
-            <client 
-                [clients]="clients"
-                (idClientEventEmitter)="removeClient($event)"
-                (selectedClientEventEmitter)="setSelectedClient($event)"/>      
-        </div>          
-    </div>    
+    <navbar [clients]="clients"/>
+    <router-outlet/>      
 </div>
-@if(open){
-    <div class="abrir-modal animacion faceIn">
-        <client-form 
-        (newClientEvenEmitter)="addClient($event)"
-        [client]="clientSelected"
-        (openEventEmitter)="setOpen()"/> 
-    </div> 
-}
+

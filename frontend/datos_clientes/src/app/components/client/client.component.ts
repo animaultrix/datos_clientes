@@ -1,24 +1,35 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, } from '@angular/core';
 import { Client } from '../../models/client';
-import Swal from 'sweetalert2'
+import { RouterModule, Router } from '@angular/router';
+import { ClientService } from '../../services/client.service';
+import { SharingDataService } from '../../service/sharing-data.service';
 
 @Component({
   selector: 'client',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css'
 })
 export class ClientComponent {
 
-  @Input() clients: Client[] = [];
-  @Output() idClientEventEmitter: EventEmitter<number> = new EventEmitter();
-  @Output() selectedClientEventEmitter: EventEmitter<Client> = new EventEmitter();
-
+  clients: Client[] = [];
+  
+  constructor(
+    private router: Router, 
+    private clientService: ClientService, 
+    private sharingDataService: SharingDataService
+   ){
+    if (this.router.getCurrentNavigation()?.extras.state) {
+      this.clients = this.router.getCurrentNavigation()?.extras.state!['clients'];
+    }else{
+      clientService.findAll().subscribe(response => this.clients = response);
+    }  
+  };
   onRemoveClient(id: number): void{    
-    this.idClientEventEmitter.emit(id);       
+    this.sharingDataService.idClientEventEmitter.emit(id);       
   };
   onSelectedClient(client: Client): void{
-    this.selectedClientEventEmitter.emit(client);  
-  };
-  
+    //this.sharingDataService.selectedClientEventEmitter.emit(client);
+    this.router.navigate(['/clients/edit', client.id], {state:{client:client}});
+  };  
 }

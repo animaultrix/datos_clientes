@@ -1,18 +1,11 @@
-<div class="modal" tabindex="-1" style="display: block;">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">{{(client.id > 0)?'Actualizar':'Crear'}} cliente</h5>
-          <button 
-            type="button" 
-            class="btn-close" 
-            data-bs-dismiss="modal" 
-            aria-label="Close"
-            (click)="onOpenClose(clientForm)">
-
-          </button>
+<div class="card" tabindex="-1" style="display: block;">
+   
+      <div class="card-content">
+        <div class="card-header">
+          <h5 class="card-title">{{(client.id > 0)?'Actualizar':'Crear'}} cliente</h5>
+          
         </div>
-        <div class="modal-body">
+        <div class="card-body">
             <form (ngSubmit)="onSubmit(clientForm)" #clientForm="ngForm">
                 <div>
                     <input 
@@ -80,14 +73,6 @@
                     </button>
                 </div>
             </form>
-        </div>
-        <div class="modal-footer">
-          <button 
-            type="button" 
-            class="btn btn-secondary" 
-            data-bs-dismiss="modal" 
-            (click)="onOpenClose(clientForm)">Cerrar</button>          
-        </div>
-      </div>
-    </div>
+        </div>       
+      </div>    
   </div>

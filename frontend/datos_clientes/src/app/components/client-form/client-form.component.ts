@@ -1,6 +1,9 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Client } from '../../models/client';
+import { SharingDataService } from '../../service/sharing-data.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'client-form',
@@ -10,17 +13,22 @@ import { Client } from '../../models/client';
 })
 export class ClientFormComponent {
 
-    @Input() client: Client;
-    @Output() newClientEvenEmitter: EventEmitter<Client> = new EventEmitter();
-    @Output() openEventEmitter: EventEmitter<boolean> = new EventEmitter();
+    client: Client;    
     
-    constructor(){
-      this.client = new Client();
+    constructor(
+      private sharingDataService: SharingDataService,
+      private router: Router
+    ){      
+      if (this.router.getCurrentNavigation()?.extras.state) {
+        this.client = this.router.getCurrentNavigation()?.extras.state!['client'];
+      }else{
+        this.client = new Client();
+      } 
     }
 
     onSubmit(clientForm: NgForm): void{
       if(clientForm.valid){
-        this.newClientEvenEmitter.emit(this.client);
+        this.sharingDataService.newClientEvenEmitter.emit(this.client);
         console.log(this.client);
       }      
       clientForm.reset();
@@ -30,10 +38,5 @@ export class ClientFormComponent {
       this.client= new Client();
       clientForm.reset();
       clientForm.resetForm();
-    }
-    onOpenClose(clientForm: NgForm){
-      this.openEventEmitter.emit();
-      clientForm.reset();
-      clientForm.resetForm();
-    }
+    }    
 }
