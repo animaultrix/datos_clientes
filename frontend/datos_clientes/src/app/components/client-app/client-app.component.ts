@@ -25,10 +25,18 @@ export class ClientAppComponent {
     ){
       
     };
+    
     ngOnInit(): void {
       this.clientService.findAll().subscribe(response => this.clients = response);
       this.addClient();
       this.removeClient();
+      this.findClientById();
+    };
+    findClientById(){
+      this.sharingDataService.findClientByIdEventEmitter.subscribe(id =>{
+        const client = this.clients.find(client => client.id == id);
+        this.sharingDataService.selectClientEventEmitter.emit(client);
+      });
     };
     addClient(){
       this.sharingDataService.newClientEvenEmitter.subscribe(client =>{
