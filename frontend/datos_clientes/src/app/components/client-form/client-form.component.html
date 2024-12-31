@@ -11,7 +11,7 @@
                     <input 
                     placeholder="Nombre"
                     name="name"
-                    [(ngModel)]="client.name"
+                    [(ngModel)]="client.nombre"
                     class="form-control"
                     required
                     minlength="1"
@@ -35,7 +35,7 @@
                     <input 
                     placeholder="Primer apellido"
                     name="lastname1"
-                    [(ngModel)]="client.lastname1"
+                    [(ngModel)]="client.apellido1"
                     class="form-control"
                     required
                     #lastname1="ngModel"
@@ -53,7 +53,7 @@
                     <input 
                     placeholder="Segundo apellido"
                     name="lastname2"
-                    [(ngModel)]="client.lastname2"
+                    [(ngModel)]="client.apellido2"
                     class="form-control"
                     #lastname2="ngModel"
                     >

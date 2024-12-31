@@ -11,15 +11,15 @@ export class ClientService {
   private clients: Client[]=[
     {
       id: 1,
-      name: 'Esteban',
-      lastname1: 'Pestana',
-      lastname2: 'Guerra'
+      nombre: 'Esteban',
+      apellido1: 'Pestana',
+      apellido2: 'Guerra'
     },
     {
       id: 2,
-      name: 'Pepe',
-      lastname1: 'Vega',
-      lastname2: 'Lopez'
+      nombre: 'Pepe',
+      apellido1: 'Vega',
+      apellido2: 'Lopez'
     }
 ];
   constructor() { }
